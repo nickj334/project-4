@@ -64,7 +64,7 @@
                <!-- columns 1 to 4  -->
                <div class="col-md-6">
                   <label>Begins at</label>
-                  <input type="datetime-local" name="begin_date" id="begin_date" value="2021-01-01T00:00" />
+                  <input type="datetime-local" name="begin_date" id="begin_date" />
                </div>
                <!-- columns 5 to 10 -->
             </div>
@@ -123,14 +123,18 @@
               var km = control.find("input[name='km']").val();
               var open_time_field = control.find("input[name='open']");
               var close_time_field = control.find("input[name='close']");
+	      
+	      var start_time = $('#begin_date').val();
+	      var brevet_dist_km = $('#brevet_dist_km').val();
 
-              $.getJSON(TIME_CALC_URL, {km: km}).done(
+              $.getJSON(TIME_CALC_URL, {km: km, start_time: start_time, brevet_dist_km: brevet_dist_km}).done(
                 function(data) {
                    var times = data.result;
                    console.log("Got a response: ");
                    console.log("Response.open = " + times.open);
                    // This part will automatically fill the open and close slots,
                    // so don't worry about those.
+
                    open_time_field.val(moment(times.open).format("YYYY-MM-DDTHH:mm"));
                    close_time_field.val(moment(times.close).format("YYYY-MM-DDTHH:mm"));
                  }
