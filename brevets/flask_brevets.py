@@ -52,8 +52,8 @@ def _calc_times():
     app.logger.debug("Got a JSON request")
     
     km = request.args.get('km', 999, type=float)
-    start_time = request.args.get("start_time")
-    brevet_dist_km = request.args.get("brevet_dist_km")
+    start_time = request.args.get("start_time", type=str)
+    brevet_dist_km = request.args.get("brevet_dist_km", type=int)
 
     app.logger.debug("request.args: {}".format(request.args))
 
